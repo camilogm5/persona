@@ -1,0 +1,98 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Clase base Persona, con atributos comunes para Estudiante y Profesor
+class Persona {
+
+// Atributo protegido    
+protected:
+   string nombre;
+   int edad;
+
+public:
+  //Metodo constructor clase persona
+   Persona(string nombre, int edad) : nombre(nombre), edad(edad) {}
+
+   // Método virtual puro (abstracto) para mostrar información.
+   virtual void mostrarInformacion() const = 0;
+
+   // Método que devuelve el nombre de la persona
+   string obtenerNombre() const {
+       return nombre;
+   }
+
+  // Método que devuelve la edad de la persona
+   int obtenerEdad() const {
+       return edad;
+   }
+
+
+   virtual ~Persona() {}
+};
+
+// Clase Estudiante (hereda de Persona)
+class Estudiante : public Persona {
+// Atributo privado    
+private:
+   string carrera;
+   int matricula;
+
+public:
+//Metodo constructor clase Estudiante
+   Estudiante(string nombre, int edad, string carrera, int matricula)
+       : Persona(nombre, edad), carrera(carrera), matricula(matricula) {}
+
+   // Implementación del método mostrarInformacion por clase estudiante  
+   void mostrarInformacion() const override {
+       cout << "Estudiante: " << nombre << endl;
+       cout << "Edad: " << edad << endl;
+       cout << "Carrera: " << carrera << endl;
+       cout << "Matrícula: " << matricula << endl;
+   }
+};
+
+// Clase Profesror (hereda de Persona)
+class Profesor : public Persona {
+// Atributo privado 
+private:
+   string departamento;
+   double salario;
+
+public:
+//Metodo constructor clase Profesor   
+   Profesor(string nombre, int edad, string departamento, double salario)
+       : Persona(nombre, edad), departamento(departamento), salario(salario) {}
+
+   // Implementación del método mostrarInformacion por clase Profesor
+   void mostrarInformacion() const override {
+       cout << "Profesor: " << nombre << endl;
+       cout << "Edad: " << edad << endl;
+       cout << "Departamento: " << departamento << endl;
+       cout << "Salario: $" << salario << endl;
+   }
+};
+
+int main() {
+ // Crear objetos Estudiante 
+   Estudiante estudiante1("Ana Figueredo", 20, "Ingeniería en Sistemas", 12345);
+   Estudiante estudiante2("Daniel Muñoz", 25, "Ingenierío indultrial", 12346);
+   Estudiante estudiante3("Melisa Moreno", 30, "Ingeniería Civil", 12347);
+  
+// Crear objetos Profesor
+   Profesor profesor1("Carlos Ramirez", 45, "Ciencias de la Computación", 55000);
+   Profesor profesor2("Pedro Casas", 45, "Ciencias de Datos", 56000);
+   Profesor profesor3("Homero Barto", 45, "Metodologias Agiles", 50000);
+
+// Mostrar la información del estudiante
+   estudiante1.mostrarInformacion();
+   estudiante2.mostrarInformacion();
+   estudiante3.mostrarInformacion();
+   cout << endl;
+// Mostrar la información del profeso 
+   profesor1.mostrarInformacion();
+   profesor2.mostrarInformacion();
+   profesor3.mostrarInformacion();
+
+   return 0;
+}
